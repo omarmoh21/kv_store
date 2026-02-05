@@ -129,20 +129,34 @@ Options:
 
 ```
 kv_store/
-├── kv_store.py          # Core KV store implementation
-├── server.py             # HTTP server (single node)
-├── client.py             # Python client library
-├── tests.py              # Comprehensive tests
-├── benchmarks.py         # Performance benchmarks
-├── cluster.py            # Cluster replication logic
-├── cluster_server.py     # Cluster-aware server
-├── cluster_tests.py      # Cluster replication tests
-├── masterless.py         # Master-less replication logic
-├── masterless_server.py  # Master-less server
-├── indexes.py            # Full-text and embedding indexes
-├── example.py            # Usage examples
-├── requirements.txt      # Dependencies
-└── README.md             # This file
+  core/
+    kv_store.py
+    client.py
+    server.py
+    indexes.py
+
+  distributed/
+    cluster/
+      cluster.py
+      cluster_server.py
+      cluster_nodes.json.example
+    masterless/
+      masterless.py
+      masterless_server.py
+      masterless_nodes.json.example
+
+  tests/
+    tests.py
+    cluster_tests.py
+
+  benchmarks/
+    benchmarks.py
+
+  README.md
+  QUICKSTART.md
+  FEATURES.md
+  requirements.txt
+  .gitignore
 ```
 
 ## Architecture Details
