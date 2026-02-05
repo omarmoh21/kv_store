@@ -1,5 +1,5 @@
 """
-Comprehensive tests for KV Store
+Comprehensive tests for KV Store.
 """
 import os
 import time
@@ -7,8 +7,9 @@ import threading
 import subprocess
 import signal
 import requests
-from client import KVStoreClient
-from kv_store import KVStore
+
+from core.client import KVStoreClient
+from core.kv_store import KVStore
 
 
 def cleanup_files(*files):
@@ -121,7 +122,7 @@ def test_client_set_get():
     
     # Start server
     server_process = subprocess.Popen(
-        ["python", "server.py", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
+        ["python", "-m", "core.server", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -147,7 +148,7 @@ def test_client_persistence():
     
     # First server instance
     server1 = subprocess.Popen(
-        ["python", "server.py", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
+        ["python", "-m", "core.server", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -168,7 +169,7 @@ def test_client_persistence():
     
     # Second server instance
     server2 = subprocess.Popen(
-        ["python", "server.py", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
+        ["python", "-m", "core.server", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -192,7 +193,7 @@ def test_concurrent_bulk_set():
     cleanup_files("test_kvstore.db", "test_kvstore.wal")
     
     server_process = subprocess.Popen(
-        ["python", "server.py", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
+        ["python", "-m", "core.server", "--db-path", "test_kvstore.db", "--wal-path", "test_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )

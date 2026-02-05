@@ -1,6 +1,6 @@
 """
 Cluster Replication System
-Primary-Secondary architecture with leader election
+Primary-Secondary architecture with leader election.
 """
 import json
 import os
@@ -9,8 +9,9 @@ import time
 import requests
 import random
 from typing import List, Dict, Optional, Tuple
-from kv_store import KVStore
-from client import KVStoreClient
+
+from core.kv_store import KVStore
+from core.client import KVStoreClient
 
 
 class ClusterNode:

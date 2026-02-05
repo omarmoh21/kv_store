@@ -1,8 +1,8 @@
 """
-Master-less HTTP Server for KV Store
+Master-less HTTP Server for KV Store.
 """
 from flask import Flask, request, jsonify
-from masterless import MasterlessKVStore, MasterlessNode
+from .masterless import MasterlessKVStore, MasterlessNode
 import threading
 import signal
 import sys

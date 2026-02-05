@@ -1,9 +1,9 @@
 """
 HTTP Server for KV Store
-Built on top of TCP using Flask for simplicity
+Built on top of TCP using Flask for simplicity.
 """
 from flask import Flask, request, jsonify
-from kv_store import KVStore
+from .kv_store import KVStore
 import threading
 import signal
 import sys

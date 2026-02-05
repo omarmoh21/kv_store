@@ -1,7 +1,7 @@
 """
-Master-less Replication System
-All nodes can accept reads and writes
-Uses vector clocks for conflict resolution
+Master-less Replication System.
+All nodes can accept reads and writes.
+Uses vector clocks for conflict resolution.
 """
 import json
 import time
@@ -9,7 +9,8 @@ import threading
 import requests
 from typing import Dict, List, Optional, Tuple, Set
 from collections import defaultdict
-from kv_store import KVStore
+
+from core.kv_store import KVStore
 
 
 class VectorClock:

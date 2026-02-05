@@ -1,5 +1,5 @@
 """
-Benchmarks for KV Store
+Benchmarks for KV Store.
 """
 import os
 import time
@@ -8,7 +8,7 @@ import subprocess
 import signal
 import random
 import requests
-from client import KVStoreClient
+from core.client import KVStoreClient
 
 
 def cleanup_files(*files):
@@ -41,7 +41,7 @@ def benchmark_write_throughput():
     cleanup_files("bench_kvstore.db", "bench_kvstore.wal")
     
     server_process = subprocess.Popen(
-        ["python", "server.py", "--db-path", "bench_kvstore.db", "--wal-path", "bench_kvstore.wal"],
+        ["python", "-m", "core.server", "--db-path", "bench_kvstore.db", "--wal-path", "bench_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -146,7 +146,7 @@ def benchmark_durability():
             
             # Restart server
             server_process = subprocess.Popen(
-                ["python", "server.py", "--db-path", "durability_kvstore.db", 
+                ["python", "-m", "core.server", "--db-path", "durability_kvstore.db",
                  "--wal-path", "durability_kvstore.wal"],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
@@ -159,7 +159,7 @@ def benchmark_durability():
     
     # Start initial server
     server_process = subprocess.Popen(
-        ["python", "server.py", "--db-path", "durability_kvstore.db", 
+        ["python", "-m", "core.server", "--db-path", "durability_kvstore.db",
          "--wal-path", "durability_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
@@ -295,7 +295,7 @@ def benchmark_bulk_durability():
             time.sleep(0.2)
             
             server_process = subprocess.Popen(
-                ["python", "server.py", "--db-path", "bulk_durability_kvstore.db", 
+                ["python", "-m", "core.server", "--db-path", "bulk_durability_kvstore.db",
                  "--wal-path", "bulk_durability_kvstore.wal"],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
@@ -307,7 +307,7 @@ def benchmark_bulk_durability():
             crash_count += 1
     
     server_process = subprocess.Popen(
-        ["python", "server.py", "--db-path", "bulk_durability_kvstore.db", 
+        ["python", "-m", "core.server", "--db-path", "bulk_durability_kvstore.db",
          "--wal-path", "bulk_durability_kvstore.wal"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE

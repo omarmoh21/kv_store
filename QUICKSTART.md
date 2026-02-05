@@ -12,29 +12,29 @@ pip install -r requirements.txt
 
 ```bash
 # Start server
-python server.py
+python -m core.server
 
 # In another terminal, use the client
-python -c "from client import KVStoreClient; c = KVStoreClient(); c.set('key', 'value'); print(c.get('key'))"
+python -c "from core.client import KVStoreClient; c = KVStoreClient(); c.set('key', 'value'); print(c.get('key'))"
 ```
 
 ### 2. Run Tests
 
 ```bash
-python tests.py
+python -m tests.tests
 ```
 
 ### 3. Run Benchmarks
 
 ```bash
 # Write throughput
-python benchmarks.py throughput
+python -m benchmarks.benchmarks throughput
 
 # Durability
-python benchmarks.py durability
+python -m benchmarks.benchmarks durability
 
 # All benchmarks
-python benchmarks.py all
+python -m benchmarks.benchmarks all
 ```
 
 ## Cluster Replication (Primary-Secondary)
@@ -53,18 +53,18 @@ python benchmarks.py all
 2. Start nodes:
 ```bash
 # Terminal 1
-python cluster_server.py --node-id node1 --port 5001 --nodes cluster_nodes.json
+python -m distributed.cluster.cluster_server --node-id node1 --port 5001 --nodes cluster_nodes.json
 
 # Terminal 2
-python cluster_server.py --node-id node2 --port 5002 --nodes cluster_nodes.json
+python -m distributed.cluster.cluster_server --node-id node2 --port 5002 --nodes cluster_nodes.json
 
 # Terminal 3
-python cluster_server.py --node-id node3 --port 5003 --nodes cluster_nodes.json
+python -m distributed.cluster.cluster_server --node-id node3 --port 5003 --nodes cluster_nodes.json
 ```
 
 3. Run cluster tests:
 ```bash
-python cluster_tests.py
+python -m tests.cluster_tests
 ```
 
 ## Master-less Replication
@@ -83,13 +83,13 @@ python cluster_tests.py
 2. Start nodes:
 ```bash
 # Terminal 1
-python masterless_server.py --node-id node1 --port 6001 --nodes masterless_nodes.json
+python -m distributed.masterless.masterless_server --node-id node1 --port 6001 --nodes masterless_nodes.json
 
 # Terminal 2
-python masterless_server.py --node-id node2 --port 6002 --nodes masterless_nodes.json
+python -m distributed.masterless.masterless_server --node-id node2 --port 6002 --nodes masterless_nodes.json
 
 # Terminal 3
-python masterless_server.py --node-id node3 --port 6003 --nodes masterless_nodes.json
+python -m distributed.masterless.masterless_server --node-id node3 --port 6003 --nodes masterless_nodes.json
 ```
 
 3. Use any node for reads/writes:
@@ -110,8 +110,8 @@ value = client.get("key", params={"consistency": "strong"})
 ## Indexed Store
 
 ```python
-from kv_store import KVStore
-from indexes import IndexedKVStore
+from core.kv_store import KVStore
+from core.indexes import IndexedKVStore
 
 # Create indexed store
 base_store = KVStore(db_path="indexed.db", wal_path="indexed.wal")
@@ -134,7 +134,4 @@ for key, score in results:
 
 ## Examples
 
-Run all examples:
-```bash
-python example.py
-```
+Examples can be created using the `core.client` and `core.kv_store` modules as shown above.

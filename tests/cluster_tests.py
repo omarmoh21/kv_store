@@ -1,5 +1,5 @@
 """
-Tests for Cluster Replication and Leader Election
+Tests for Cluster Replication and Leader Election.
 """
 import os
 import time
@@ -8,7 +8,8 @@ import subprocess
 import signal
 import requests
 import json
-from client import KVStoreClient
+
+from core.client import KVStoreClient
 
 
 def cleanup_files(*files):
@@ -62,7 +63,7 @@ def test_cluster_replication():
     processes = []
     for node in nodes_config:
         proc = subprocess.Popen(
-            ['python', 'cluster_server.py',
+            ['python', '-m', 'distributed.cluster.cluster_server',
              '--node-id', node['id'],
              '--host', node['host'],
              '--port', str(node['port']),
@@ -130,7 +131,7 @@ def test_leader_election():
     processes = []
     for node in nodes_config:
         proc = subprocess.Popen(
-            ['python', 'cluster_server.py',
+            ['python', '-m', 'distributed.cluster.cluster_server',
              '--node-id', node['id'],
              '--host', node['host'],
              '--port', str(node['port']),
@@ -216,7 +217,7 @@ def test_cluster_persistence():
     processes = []
     for node in nodes_config:
         proc = subprocess.Popen(
-            ['python', 'cluster_server.py',
+            ['python', '-m', 'distributed.cluster.cluster_server',
              '--node-id', node['id'],
              '--host', node['host'],
              '--port', str(node['port']),

@@ -1,8 +1,8 @@
 """
-Cluster-aware HTTP Server for KV Store
+Cluster-aware HTTP Server for KV Store.
 """
 from flask import Flask, request, jsonify
-from cluster import ClusterKVStore, ClusterManager, ClusterNode
+from .cluster import ClusterKVStore, ClusterManager, ClusterNode
 import threading
 import signal
 import sys
